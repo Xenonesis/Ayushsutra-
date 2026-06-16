@@ -2,26 +2,124 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* ── AyurSutra warm-earth palette (HSL channels) ── */
+    --background: 38 38% 94%;        /* warm cream  #F6F1E7 */
+    --foreground: 24 22% 16%;        /* espresso ink #33291F */
+
+    --card: 40 44% 97%;              /* paler cream */
+    --card-foreground: 24 22% 16%;
+
+    --popover: 40 44% 97%;
+    --popover-foreground: 24 22% 16%;
+
+    --primary: 130 22% 30%;          /* forest green #3C5A40 */
+    --primary-foreground: 40 44% 97%;
+
+    --secondary: 36 32% 85%;         /* warm sand  #E8DEC8 */
+    --secondary-foreground: 24 22% 16%;
+
+    --muted: 36 24% 90%;
+    --muted-foreground: 28 14% 42%;
+
+    --accent: 22 58% 51%;            /* saffron-terracotta #C9783C */
+    --accent-foreground: 40 44% 97%;
+
+    --destructive: 0 65% 45%;
+    --destructive-foreground: 40 44% 97%;
+
+    --border: 36 28% 80%;            /* #E2D7BE */
+    --input: 36 28% 80%;
+    --ring: 130 22% 30%;
+
+    /* Dosha tokens */
+    --vata: 201 18% 64%;             /* muted sky */
+    --vata-soft: 201 30% 90%;
+    --pitta: 22 65% 54%;             /* saffron */
+    --pitta-soft: 24 70% 90%;
+    --kapha: 95 20% 45%;             /* sage */
+    --kapha-soft: 95 24% 88%;
+
+    /* Named extras */
+    --cream: 38 38% 94%;
+    --ink: 24 22% 16%;
+
+    --radius: 0.85rem;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "ss01", "cv01", "cv11";
+  }
+  ::selection {
+    background-color: hsl(var(--primary) / 0.18);
+    color: hsl(var(--foreground));
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+    font-feature-settings: "ss01";
+  }
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 11px; height: 11px; }
+  ::-webkit-scrollbar-track { background: hsl(var(--muted)); }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.4);
+    border-radius: 999px;
+    border: 3px solid hsl(var(--muted));
+  }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground) / 0.6); }
+}
+
+@layer components {
+  /* Subtle film-grain overlay applied to atmospheric sections */
+  .grain-overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: theme("backgroundImage.grain");
+    opacity: 0.04;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    z-index: 1;
+  }
+
+  /* Eyebrow / kicker label */
+  .kicker {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent;
+  }
+
+  /* Decorative dotted divider */
+  .dot-rule {
+    background-image: radial-gradient(currentColor 1px, transparent 1px);
+    background-size: 8px 8px;
+    height: 2px;
+    opacity: 0.3;
+  }
+
+  /* Reusable display headline */
+  .display {
+    @apply font-display font-light leading-[1.05] tracking-tight;
+  }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+
+  /* Layered organic blob shape via radial gradients */
+  .blob-mask {
+    border-radius: 64% 36% 47% 53% / 47% 42% 58% 53%;
+  }
+  .blob-mask-2 {
+    border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
   }
 }
