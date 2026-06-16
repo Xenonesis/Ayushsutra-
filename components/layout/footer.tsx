@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo } from "@/components/brand/logo";
 import { LeafSprig } from "@/components/brand/decor";
+import { GitHubStars } from "@/components/github-stars";
 import { FOOTER_LINKS } from "@/lib/data";
 
 export function Footer() {
@@ -20,6 +21,9 @@ export function Footer() {
               — To preserve the health of the healthy.
             </span>
           </p>
+          <div className="pt-2">
+            <GitHubStars />
+          </div>
         </div>
 
         {Object.entries(FOOTER_LINKS).map(([heading, links]) => (

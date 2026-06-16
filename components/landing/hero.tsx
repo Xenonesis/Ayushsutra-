@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Sparkles, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { GitHubStars } from "@/components/github-stars";
 import { AuraBlob, ChakraRing, LeafSprig } from "@/components/brand/decor";
 import { STATS } from "@/lib/data";
 
@@ -25,6 +26,9 @@ export function Hero() {
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
           {/* Copy */}
           <div className="animate-fade-up text-center lg:text-left">
+            <div className="mb-5 flex justify-center lg:justify-start">
+              <GitHubStars />
+            </div>
             <span className="kicker mb-5 justify-center lg:justify-start">
               <Sparkles className="h-3.5 w-3.5" />
               Ancient wisdom · Modern care
