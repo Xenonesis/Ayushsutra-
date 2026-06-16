@@ -32,7 +32,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { REPORTS, REPORT_TYPES, PATIENT, formatDate } from "@/lib/data";
+import { REPORTS, REPORT_TYPES, PATIENT } from "@/lib/data";
+import { formatDate } from "@/lib/utils";
 
 export default function ReportsPage() {
   const [type, setType] = useState("");

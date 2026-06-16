@@ -36,8 +36,8 @@ import {
   DOSHA_BALANCE,
   RECOMMENDATIONS,
   REPORTS,
-  formatDate,
 } from "@/lib/data";
+import { formatDate } from "@/lib/utils";
 
 export default function PatientDashboardPage() {
   return (

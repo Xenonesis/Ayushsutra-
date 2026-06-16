@@ -1,103 +1,200 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "tw-animate-css";
 
-@layer base {
-  :root {
-    /* ── AyurSutra warm-earth palette (HSL channels) ── */
-    --background: 38 38% 94%;        /* warm cream  #F6F1E7 */
-    --foreground: 24 22% 16%;        /* espresso ink #33291F */
+@theme {
+  /* ── AyurSutra warm-earth palette ── */
+  --color-background: hsl(38 38% 94%);
+  --color-foreground: hsl(24 22% 16%);
 
-    --card: 40 44% 97%;              /* paler cream */
-    --card-foreground: 24 22% 16%;
+  --color-card: hsl(40 44% 97%);
+  --color-card-foreground: hsl(24 22% 16%);
 
-    --popover: 40 44% 97%;
-    --popover-foreground: 24 22% 16%;
+  --color-popover: hsl(40 44% 97%);
+  --color-popover-foreground: hsl(24 22% 16%);
 
-    --primary: 130 22% 30%;          /* forest green #3C5A40 */
-    --primary-foreground: 40 44% 97%;
+  --color-primary: hsl(130 22% 30%);
+  --color-primary-foreground: hsl(40 44% 97%);
 
-    --secondary: 36 32% 85%;         /* warm sand  #E8DEC8 */
-    --secondary-foreground: 24 22% 16%;
+  --color-secondary: hsl(36 32% 85%);
+  --color-secondary-foreground: hsl(24 22% 16%);
 
-    --muted: 36 24% 90%;
-    --muted-foreground: 28 14% 42%;
+  --color-muted: hsl(36 24% 90%);
+  --color-muted-foreground: hsl(28 14% 42%);
 
-    --accent: 22 58% 51%;            /* saffron-terracotta #C9783C */
-    --accent-foreground: 40 44% 97%;
+  --color-accent: hsl(22 58% 51%);
+  --color-accent-foreground: hsl(40 44% 97%);
 
-    --destructive: 0 65% 45%;
-    --destructive-foreground: 40 44% 97%;
+  --color-destructive: hsl(0 65% 45%);
+  --color-destructive-foreground: hsl(40 44% 97%);
 
-    --border: 36 28% 80%;            /* #E2D7BE */
-    --input: 36 28% 80%;
-    --ring: 130 22% 30%;
+  --color-border: hsl(36 28% 80%);
+  --color-input: hsl(36 28% 80%);
+  --color-ring: hsl(130 22% 30%);
 
-    /* Dosha tokens */
-    --vata: 201 18% 64%;             /* muted sky */
-    --vata-soft: 201 30% 90%;
-    --pitta: 22 65% 54%;             /* saffron */
-    --pitta-soft: 24 70% 90%;
-    --kapha: 95 20% 45%;             /* sage */
-    --kapha-soft: 95 24% 88%;
+  /* Ayurvedic dosha palette */
+  --color-vata: hsl(201 18% 64%);
+  --color-vata-soft: hsl(201 30% 90%);
+  --color-pitta: hsl(22 65% 54%);
+  --color-pitta-soft: hsl(24 70% 90%);
+  --color-kapha: hsl(95 20% 45%);
+  --color-kapha-soft: hsl(95 24% 88%);
 
-    /* Named extras */
-    --cream: 38 38% 94%;
-    --ink: 24 22% 16%;
+  --color-cream: hsl(38 38% 94%);
+  --color-ink: hsl(24 22% 16%);
 
-    --radius: 0.85rem;
+  /* Radius scale (driven by --radius) */
+  --radius: 0.85rem;
+  --radius-sm: calc(var(--radius) - 8px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 12px);
+
+  /* Fonts (CSS variables set by next/font in layout.tsx) */
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+
+  /* Shadows */
+  --shadow-soft: 0 1px 2px hsl(24 22% 16% / 0.04),
+    0 8px 24px -12px hsl(24 22% 16% / 0.12);
+  --shadow-lift: 0 2px 4px hsl(24 22% 16% / 0.05),
+    0 18px 40px -16px hsl(24 22% 16% / 0.22);
+  --shadow-glow: 0 0 0 1px hsl(130 22% 30% / 0.12),
+    0 24px 60px -20px hsl(130 22% 30% / 0.35);
+
+  /* Custom background image: film grain */
+  --background-image-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+
+  /* Animations */
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: fade-in 0.8s ease both;
+  --animate-float-slow: float-slow 8s ease-in-out infinite;
+  --animate-breathe: breathe 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 2s infinite;
+
+  /* Container */
+  --breakpoint-2xl: 1280px;
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
   }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.8;
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+  max-width: 1280px;
 }
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: var(--color-border);
   }
   html {
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
     font-feature-settings: "ss01", "cv01", "cv11";
   }
   ::selection {
-    background-color: hsl(var(--primary) / 0.18);
-    color: hsl(var(--foreground));
+    background-color: hsl(130 22% 30% / 0.18);
+    color: hsl(24 22% 16%);
   }
-  h1, h2, h3, h4 {
-    @apply font-display;
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
     font-feature-settings: "ss01";
   }
-  /* Custom scrollbar */
-  ::-webkit-scrollbar { width: 11px; height: 11px; }
-  ::-webkit-scrollbar-track { background: hsl(var(--muted)); }
-  ::-webkit-scrollbar-thumb {
-    background: hsl(var(--muted-foreground) / 0.4);
-    border-radius: 999px;
-    border: 3px solid hsl(var(--muted));
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
   }
-  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground) / 0.6); }
+  ::-webkit-scrollbar-track {
+    background: hsl(36 24% 90%);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(28 14% 42% / 0.4);
+    border-radius: 999px;
+    border: 3px solid hsl(36 24% 90%);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(28 14% 42% / 0.6);
+  }
 }
 
 @layer components {
-  /* Subtle film-grain overlay applied to atmospheric sections */
   .grain-overlay::before {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: theme("backgroundImage.grain");
+    background-image: var(--background-image-grain);
     opacity: 0.04;
     pointer-events: none;
     mix-blend-mode: multiply;
     z-index: 1;
   }
 
-  /* Eyebrow / kicker label */
   .kicker {
-    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-accent);
   }
 
-  /* Decorative dotted divider */
   .dot-rule {
     background-image: radial-gradient(currentColor 1px, transparent 1px);
     background-size: 8px 8px;
@@ -105,17 +202,22 @@
     opacity: 0.3;
   }
 
-  /* Reusable display headline */
   .display {
-    @apply font-display font-light leading-[1.05] tracking-tight;
+    font-family: var(--font-display);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
   }
 }
 
 @layer utilities {
-  .text-balance { text-wrap: balance; }
-  .text-pretty { text-wrap: pretty; }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
 
-  /* Layered organic blob shape via radial gradients */
   .blob-mask {
     border-radius: 64% 36% 47% 53% / 47% 42% 58% 53%;
   }
