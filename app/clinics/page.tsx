@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { ClinicCardArt } from "@/components/brand/clinic-art";
 import { CLINICS, PATIENT } from "@/lib/data";
 
 export default function ClinicsListPage() {
@@ -66,10 +67,7 @@ export default function ClinicsListPage() {
           <Link key={clinic.id} href={`/clinics/${clinic.id}`}>
             <Card className="h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
               <CardContent className="p-6">
-                {/* Image placeholder */}
-                <div className="mb-4 flex h-40 items-center justify-center rounded-2xl bg-secondary/50 text-sm text-muted-foreground">
-                  🏥
-                </div>
+                <ClinicCardArt clinicId={clinic.id} clinicName={clinic.name} />
 
                 <div className="flex items-start justify-between">
                   <div>
